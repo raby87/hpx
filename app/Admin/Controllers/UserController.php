@@ -5,8 +5,10 @@ namespace App\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
+use Encore\Admin\Show;
 
 class UserController extends AdminController
 {
@@ -28,7 +30,19 @@ class UserController extends AdminController
             $filter->equal('email', "邮箱");
         });
 
-        $grid->disableActions();
+        //$grid->disableActions();
         return $content->body($grid);
+    }
+    public function detail($id){
+        $show = new Show(User::query()->findOrFail($id));
+        $show->field('uid', 'ID');
+        $show->field('nickname', '昵称');
+        return $show;
+    }
+    public function form(){
+
+        $form = new Form(new User());
+        $form->text('nickname','昵称');
+        return $form;
     }
 }

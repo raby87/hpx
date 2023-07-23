@@ -38,5 +38,9 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+//        $this->renderable(function (NotFoundHttpException $e) {
+//            //404跳转到首页
+//            return redirect("/");
+//        });
     }
 }
